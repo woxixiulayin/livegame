@@ -1,8 +1,10 @@
+'use stricts'
+import { devMiddleware, hotMiddleware } from 'koa-webpack-middleware'
 var path = require('path')
 var koa = require('koa')
 var webpack = require('webpack')
 var config = require('../config')
-var server = require('koa-static')
+var serve = require('koa-static')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
@@ -14,10 +16,10 @@ var port = process.env.PORT || config.dev.port
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = config.dev.proxyTable
 
-var app = koa()
+var app = new koa()
 var compiler = webpack(webpackConfig)
 
-var devMiddleware = require('koa-webpack-middleware').devMiddleware(compiler, {
+var mydevMiddleware = devMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
   stats: {
     colors: true,
@@ -25,7 +27,7 @@ var devMiddleware = require('koa-webpack-middleware').devMiddleware(compiler, {
   }
 })
 
-var hotMiddleware = require('koa-webpack-middleware').hotMiddleware(compiler)
+var myhotMiddleware = hotMiddleware(compiler)
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
@@ -44,14 +46,14 @@ Object.keys(proxyTable).forEach(function (context) {
 })
 
 // handle fallback for HTML5 history API
-app.use(require('connect-history-api-fallback')())
+app.use(require('koa-connect-history-api-fallback')())
 
 // serve webpack bundle output
-app.use(devMiddleware)
+app.use(mydevMiddleware)
 
 // enable hot-reload and state-preserving
 // compilation error display
-app.use(hotMiddleware)
+app.use(myhotMiddleware)
 
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
