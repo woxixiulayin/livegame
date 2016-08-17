@@ -27,10 +27,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss'>
+$fontsize: 16px;
+
 body
 {
-  font-size: 16px;
+  font-size: $fontsize;
+  padding-top: 50/14*$fontsize;
 }
 
 </style>
