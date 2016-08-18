@@ -3,8 +3,6 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import App from './App'
 import appBody from './components/Body.vue'
-import postslist from './components/Postslist.vue'
-import post from './components/Post.vue'
 
 //  use vuerouter
 Vue.use(VueRouter)
@@ -20,18 +18,7 @@ let router = new VueRouter()
 
 router.map({
   '/': {
-    component: appBody,
-    subRoutes: {
-      '/': {
-        component: postslist
-      },
-      '/posts': {
-        component: postslist
-      },
-      '/posts/:posttitle': {
-        component: post
-      }
-    }
+    component: appBody
   }
 })
 
