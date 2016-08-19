@@ -1,0 +1,20 @@
+//
+//  响应式布局，媒体查询
+//
+
+@import "variables";
+
+$content-width: 1000px;
+
+.content-wrap {
+  @include clearfix;
+
+  @media (max-width: $content-width + 1) {
+    width: 100%;
+  }
+
+  @media (min-width: $content-width) {
+    width: $content-width;
+    margin: 0 auto;
+  }
+}

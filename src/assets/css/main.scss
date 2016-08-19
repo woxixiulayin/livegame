@@ -1,40 +1,29 @@
-//reset file
+//  reset file
 @import "normalize";
 @import "extra-normalize";
 
-/*
-  mixin
-*/
+// variables
+@import "variables";
 
-//clearfix
-@mixin clearfix {
+//  mixin
+@import "mixin";
 
-  &:before,
-  &:after {
-    content: '';
-    display: block;
-  }
+// media query
+@import "mediaquery";
 
-  &:after {
-    clear: both;
-  }
-  
-  //for ie6/7
-  *zoom: 1;
-}
+// globle class
 
 .clearfix {
   @include clearfix;
 }
-
-
-/*
-  global class
-*/
 
 .container {
   @include clearfix;
   
   width: 100%;
   background: yellow;
+}
+
+.text-center {
+  text-align: center;
 }

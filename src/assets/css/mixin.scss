@@ -1,0 +1,27 @@
+//
+// mixin
+//
+
+//clearfix
+@mixin clearfix {
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+  }
+
+  &:after {
+    clear: both;
+  }
+  
+  //for ie6/7
+  *zoom: 1;
+}
+
+//// Box sizing
+@mixin box-sizing($boxmodel) {
+  -webkit-box-sizing: $boxmodel;
+     -moz-box-sizing: $boxmodel;
+          box-sizing: $boxmodel;
+}
