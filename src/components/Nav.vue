@@ -1,7 +1,7 @@
 <template>
   <nav class='container'>
   <div class='content-wrap'>
-    <ul class='nav'>
+    <ul class='n'>
       <li v-for='iterm in categories'>
         {{ iterm.name }}
       </li>
