@@ -1,6 +1,12 @@
 <template>
-  <nav>
-  
+  <nav class='container'>
+  <div class='nav-bar'>
+    <ul class='nav'>
+      <li v-for='iterm in categories'>
+        {{ iterm.name }}
+      </li>
+    </ul>
+  </div>
   </nav>
 </template>
 
@@ -18,6 +24,8 @@ export default {
 </script>
 
 <style lang='scss'>
+@import '../assets/css/main.scss';
+
 $itemwidth: 5rem;
 $bgcol: rgb(52, 73, 94);
 $height: 3rem;

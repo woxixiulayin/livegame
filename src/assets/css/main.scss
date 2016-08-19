@@ -1,0 +1,40 @@
+//reset file
+@import "normalize";
+@import "extra-normalize";
+
+/*
+  mixin
+*/
+
+//clearfix
+@mixin clearfix {
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+  }
+
+  &:after {
+    clear: both;
+  }
+  
+  //for ie6/7
+  *zoom: 1;
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+
+/*
+  global class
+*/
+
+.container {
+  @include clearfix;
+  
+  width: 100%;
+  background: yellow;
+}
