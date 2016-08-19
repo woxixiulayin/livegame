@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import App from './App'
-import appBody from './components/Body.vue'
 
 //  use vuerouter
 Vue.use(VueRouter)
@@ -17,9 +16,9 @@ new Vue({
 let router = new VueRouter()
 
 router.map({
-  '/': {
-    component: appBody
-  }
+  // '/': {
+  //   component: appBody
+  // }
 })
 
 // 路由挂载到app-body上
