@@ -15,3 +15,14 @@ store.liveCategories = [
     sites: defaultSites
   }
 ]
+
+store.liveCategories.map(item => {
+  item.sites.map(site => {
+    store.on(`update-${item.name}-${site}`, () => {
+      console.log(`update-${item.name}-${site}`)
+    })
+    store.on(`update-${item.name}-rank`, () => {
+      console.log(`update-${item.name}-rank`)
+    })
+  })
+})
