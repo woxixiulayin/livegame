@@ -11,7 +11,7 @@ store.liveCategories = [
     sites: defaultSites
   },
   {
-    name: 'LOA',
+    name: 'LOL',
     sites: defaultSites
   }
 ]

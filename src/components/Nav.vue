@@ -53,6 +53,7 @@ export default {
 
     changTocategory: function (index) {
       this.index = index
+      store.emit('update-' + this.categories[index].name)
     }
   }
 }
