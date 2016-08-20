@@ -25,3 +25,7 @@
      -moz-box-sizing: $boxmodel;
           box-sizing: $boxmodel;
 }
+
+@mixin font-padding {
+  padding: .08em 2em;
+}
