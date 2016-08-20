@@ -17,12 +17,14 @@ store.liveCategories = [
 ]
 
 store.liveCategories.map(item => {
+  //  注册获取全网排行事件
+  store.on(`update-${item.name}-rank`, () => {
+    console.log(`update-${item.name}-rank`)
+  })
+  //  注册获取当前游戏具体网站直播信息
   item.sites.map(site => {
     store.on(`update-${item.name}-${site}`, () => {
       console.log(`update-${item.name}-${site}`)
-    })
-    store.on(`update-${item.name}-rank`, () => {
-      console.log(`update-${item.name}-rank`)
     })
   })
 })

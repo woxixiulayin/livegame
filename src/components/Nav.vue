@@ -3,13 +3,13 @@
   <div class="container nav-main">
   <div class='content-wrap'>
     <ul>
-      <li v-for='iterm in categories' track-by="name">
+      <li v-for='item in categories' track-by="name">
         <a
-        type = 'category'
+        :name = 'item.name'
         :index = $index
         :class="['nav-item',$index==index? 'active': '']"
         href="#">
-        {{ iterm.name }}
+        {{ item.name }}
         </a>
       </li>
     </ul>
@@ -20,7 +20,7 @@
     <ul>
       <li v-for='site in categories[index].sites'>
         <a
-        type = 'site' 
+        :site = 'site' 
         class='nav-item' href="#">
         {{ site }}
         </a>
@@ -46,14 +46,24 @@ export default {
     click: function (e) {
       let ele = e.target
       if (ele.tagName !== 'A') return false
-      switch (ele.getAttribute('type')) {
-        case 'category': this.changTocategory(ele.getAttribute('index'))
+
+      //  点击游戏种类触发
+      if (ele.hasAttribute('name')) {
+        this.index = ele.getAttribute('index')
+        this.refreshName(ele.getAttribute('name'))
+      } else if (ele.hasAttribute('site')) {  //  点击网址触发
+        let name = this.categories[this.index].name
+        this.refreshSite(name, ele.getAttribute('site'))
       }
     },
 
-    changTocategory: function (index) {
-      this.index = index
-      store.emit('update-' + this.categories[index].name)
+    refreshName: function (name) {
+      //  触发获取当前游戏全网直播排行事件
+      store.emit(`update-${name}-rank`)
+    },
+    refreshSite: function (name, site) {
+      // 触发获得当前游戏下具体网站的直播信息事件
+      store.emit(`update-${name}-${site}`)
     }
   }
 }
