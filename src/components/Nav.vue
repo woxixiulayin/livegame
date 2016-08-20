@@ -32,12 +32,12 @@
 </template>
 
 <script>
-import store from '../store'
+import event from '../event'
 
 export default {
   data () {
     return {
-      categories: store.liveCategories,
+      categories: event.liveCategories,
       index: 0
     }
   },
@@ -59,11 +59,11 @@ export default {
 
     refreshName: function (name) {
       //  触发获取当前游戏全网直播排行事件
-      store.emit(`update-${name}-rank`)
+      event.emit(`update-${name}-rank`)
     },
     refreshSite: function (name, site) {
       // 触发获得当前游戏下具体网站的直播信息事件
-      store.emit(`update-${name}-${site}`)
+      event.emit(`update-${name}-${site}`)
     }
   }
 }
