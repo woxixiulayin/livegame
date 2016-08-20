@@ -1,10 +1,12 @@
 <template>
-  <nav>
+  <nav @click="click">
   <div class="container nav-main">
   <div class='content-wrap'>
     <ul>
-      <li v-for='iterm in categories'>
-        <a 
+      <li v-for='iterm in categories' track-by="name">
+        <a
+        type = 'category'
+        :index = $index
         :class="['nav-item',$index==index? 'active': '']"
         href="#">
         {{ iterm.name }}
@@ -17,7 +19,9 @@
     <div class='content-wrap'>
     <ul>
       <li v-for='site in categories[index].sites'>
-        <a class='nav-item' href="#">
+        <a
+        type = 'site' 
+        class='nav-item' href="#">
         {{ site }}
         </a>
       </li>
@@ -35,6 +39,20 @@ export default {
     return {
       categories: store.liveCategories,
       index: 0
+    }
+  },
+
+  methods: {
+    click: function (e) {
+      let ele = e.target
+      if (ele.tagName !== 'A') return false
+      switch (ele.getAttribute('type')) {
+        case 'category': this.changTocategory(ele.getAttribute('index'))
+      }
+    },
+
+    changTocategory: function (index) {
+      this.index = index
     }
   }
 }
@@ -60,9 +78,7 @@ $color-font-hover: $color-bg-active;
   color: $color-font-base;
   @include font-padding;
   &:hover {
-
       color: $color-bg-active;
-    /*background: $color-bg-active;*/
   }
   transition: all .5s;
 }
@@ -80,8 +96,10 @@ $color-font-hover: $color-bg-active;
 }
 
 .nav-sub ul {
-  display: inline-block;
+  /*display: inline-block;*/
   background: $color-bg-sub;
+  border: 1px solid $color-br;
+  border-top: none;
 }
 
 .nav-main  li,
@@ -93,7 +111,10 @@ $color-font-hover: $color-bg-active;
   font-size: $nav-fontsize-base;
   line-height: $height;
   font-weight: bold;
-
+  
+  //边框效果
+  border: 1px solid $color-bg-main;
+  border-bottom: none;
 }
 
 .nav-sub .nav-item {
@@ -106,8 +127,7 @@ $color-font-hover: $color-bg-active;
   position: relative;
   color: $color-bg-active;
   background: $color-bg-sub;
-  border: 1px solid $color-br;
-  border-bottom: none;
+  border-color: $color-br;
   /*border-bottom: 1px solid $color-bg-sub;*/
   &:after {
     content: '';

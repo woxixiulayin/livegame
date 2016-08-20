@@ -16,9 +16,10 @@ new Vue({
 let router = new VueRouter()
 
 router.map({
-  // '/': {
-  //   component: appBody
-  // }
+  '/favicon.ico': {
+    component: {
+    }
+  }
 })
 
 // 路由挂载到app-body上
