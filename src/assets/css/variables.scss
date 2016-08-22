@@ -8,7 +8,7 @@
 
 // Extra small screen / phone
 //** Deprecated `$screen-xs` as of v3.0.1
-$screen-xs:                  480px !default;
+$screen-xs:                  530px !default;
 //** Deprecated `$screen-xs-min` as of v3.2.0
 $screen-xs-min:              $screen-xs !default;
 //** Deprecated `$screen-phone` as of v3.0.1
@@ -43,4 +43,4 @@ $btn-font-color: white;
 
 //定义rank的固定宽度
 $rankwidth: 350px;
-$livewrap-minwith: 300px;
+$livewrap-minwith: 400px;
