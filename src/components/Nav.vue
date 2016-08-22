@@ -34,7 +34,6 @@
 <script>
 import info from '../infocenter'
 import update from '../update'
-import Vue from 'vue'
 
 export default {
   data () {
@@ -42,9 +41,7 @@ export default {
       allGameSites: info.allGameSites,
       game: info.allGameSites[0].game,
       siteChecked: String,
-      gameSiteChected: new Vue({
-        data: {}
-      })
+      gameSiteChected: {}
     }
   },
   computed: {
@@ -75,7 +72,7 @@ export default {
       this.refreshGame()
     },
     changeSite (site) {
-      this.gameSiteChected[this.game] = site
+      this.gameSiteChected = this.changeGameSiteChected(this.game, site)
       this.refreshGameSite(this.game, this.site)
     },
     refreshGame () {
@@ -83,20 +80,23 @@ export default {
       this.refreshGameSite(this.game, this.gameSiteChected[this.game])
     },
     // 排行榜更新事件
-    refreshGameRank: function (game) {
+    refreshGameRank (game) {
       //  触发获取当前游戏全网直播排行事件
       update.emit(`${game}-rank`)
     },
     // 直播内容更新事件
-    refreshGameSite: function (game, site) {
+    refreshGameSite (game, site) {
       // 触发获得当前游戏下具体网站的直播信息事件
       update.emit(`${game}-${site}`)
     },
     initGameSiteChected () {
       info.allGameSites.map(item => {
-        //  为gameSiteChected这个属性添加响应化属性
-        this.gameSiteChected.$set(item.game, item.sites[0])
+        this.changeGameSiteChected(item.game, item.sites[0])
       })
+    },
+    changeGameSiteChected (game, site) {
+      this.gameSiteChected[game] = site
+      return Object.assign({}, this.gameSiteChected)
     }
   }
 }
