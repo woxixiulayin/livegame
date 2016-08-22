@@ -3,11 +3,11 @@
   <div class="container nav-main">
   <div class='content-wrap'>
     <ul>
-      <li v-for='item in gameSites' track-by="$index">
+      <li v-for='item in allGameSites' track-by="$index">
         <a
         :game = 'item.game'
         :index = $index
-        :class="['nav-item',gameSites[$index].game==game? 'active': '']"
+        :class="['nav-item',allGameSites[$index].game==game? 'active': '']"
         href="#">
         {{ item.game }}
         </a>
@@ -18,10 +18,10 @@
   <div class="container nav-sub">
     <div class='content-wrap'>
     <ul>
-      <li v-for='site in getSitesfromGame(game)'>
+      <li v-for='site in sites'>
         <a
         :site = 'site' 
-        class='nav-item' href="#">
+        :class="['nav-item', gameSiteChected[game]==site? 'active': '']" href="#">
         {{ site }}
         </a>
       </li>
@@ -38,42 +38,58 @@ import update from '../update'
 export default {
   data () {
     return {
-      gameSites: info.gameSites,
-      game: info.gameSites[0].game
+      allGameSites: info.allGameSites,
+      game: info.allGameSites[0].game,
+      gameSiteChected: {}
+    }
+  },
+  computed: {
+    cached: false,
+    sites: function () {
+      return this.allGameSites.filter(item => item.game === this.game)[0].sites || []
     }
   },
 
   created () {
-    console.log(this.gameSites)
+    this.initGameSiteChected()
+    console.log(this.gameSiteChected)
   },
 
   methods: {
-    getSitesfromGame: function (game) {
-      return this.gameSites.filter(item => item.game === game)[0].sites || []
-    },
-
     click: function (e) {
       let ele = e.target
       if (ele.tagName !== 'A') return false
 
       //  点击游戏种类触发
       if (ele.hasAttribute('game')) {
-        this.game = ele.getAttribute('game')
-        this.refreshGameRank(ele.getAttribute('game'))
-        this.refreshSite(this.game, ele.getAttribute('site'))
+        this.changeGame(ele.getAttribute('game'))
       } else if (ele.hasAttribute('site')) {  //  点击网址触发
-        let game = this.categories[this.index].game
-        this.refreshSite(game, ele.getAttribute('site'))
+        this.changeSite(ele.getAttribute('site'))
       }
     },
-
+    changeGame (game) {
+      this.game = game
+      this.refreshGame()
+    },
+    changeSite (site) {
+      this.gameSiteChected[this.game] = site
+      console.log(this.gameSiteChected)
+      this.refreshGameSite(this.game, this.site)
+    },
+    refreshGame () {
+      this.refreshGameRank(this.game)
+      this.refreshGameSite(this.game, this.gameSiteChected[this.game])
+    },
     refreshGameRank: function (game) {
       //  触发获取当前游戏全网直播排行事件
       update.emit(`${game}-rank`)
     },
-    refreshSite: function (game, site) {
+    refreshGameSite: function (game, site) {
       // 触发获得当前游戏下具体网站的直播信息事件
       update.emit(`${game}-${site}`)
+    },
+    initGameSiteChected () {
+      this.allGameSites.map(item => (this.gameSiteChected[item.game] = item.sites[0]))
     }
   }
 }
@@ -162,5 +178,6 @@ $color-font-hover: $color-bg-active;
 }
 
 .nav-sub .active {
+  color: $color-bg-active;
 }
 </style>

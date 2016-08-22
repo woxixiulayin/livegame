@@ -4,7 +4,7 @@ export default info
 
 const defaultSites = ['熊猫', '战旗', '斗鱼', '虎牙', '全民']
 
-info.gameSites = [
+info.allGameSites = [
   {
     game: 'DOTA',
     sites: defaultSites
