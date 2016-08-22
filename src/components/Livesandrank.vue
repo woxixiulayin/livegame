@@ -2,8 +2,8 @@
   <div class="container">
   <!-- 排行榜和直播信息 -->
     <div class="content-wrap livesandrank-wrap">
-      <lives></lives>
       <rankcontent></rankcontent>
+      <lives></lives>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
 
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 $color-border: #888;
 
 .livesandrank-wrap {
