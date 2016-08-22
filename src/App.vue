@@ -1,4 +1,6 @@
 <template>
+  <div class="fullscreen">
+  </div>
   <header>
     <app-nav></app-nav>
   </header>
@@ -26,5 +28,13 @@ export default {
 </script>
 
 <style lang='scss'>
-
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(./assets/img/fullscreen_bg.png);
+  z-index: -1;
+}
 </style>

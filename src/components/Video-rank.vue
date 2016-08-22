@@ -23,20 +23,4 @@ export default {
 
 <style lang='scss' scoped>
 
-.fullscreen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-image: url(../assets/img/fullscreen_bg.png);
-  z-index: -1;
-}
-
-.fullscreen .content-wrap {
-  margin: 100px auto 0;
-  background: yellow;
-  height: auto;
-}
-
 </style>
