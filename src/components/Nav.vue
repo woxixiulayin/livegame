@@ -76,7 +76,6 @@ export default {
     },
     changeSite (site) {
       this.gameSiteChected[this.game] = site
-      this.$log()
       this.refreshGameSite(this.game, this.site)
     },
     refreshGame () {
