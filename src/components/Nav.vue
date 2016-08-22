@@ -3,13 +3,13 @@
   <div class="container nav-main">
   <div class='content-wrap'>
     <ul>
-      <li v-for='item in categories' track-by="name">
+      <li v-for='item in gameSites' track-by="$index">
         <a
-        :name = 'item.name'
+        :game = 'item.game'
         :index = $index
-        :class="['nav-item',$index==index? 'active': '']"
+        :class="['nav-item',gameSites[$index].game==game? 'active': '']"
         href="#">
-        {{ item.name }}
+        {{ item.game }}
         </a>
       </li>
     </ul>
@@ -18,7 +18,7 @@
   <div class="container nav-sub">
     <div class='content-wrap'>
     <ul>
-      <li v-for='site in categories[index].sites'>
+      <li v-for='site in getSitesfromGame(game)'>
         <a
         :site = 'site' 
         class='nav-item' href="#">
@@ -32,38 +32,48 @@
 </template>
 
 <script>
-import event from '../event'
+import info from '../infocenter'
+import update from '../update'
 
 export default {
   data () {
     return {
-      categories: event.liveCategories,
-      index: 0
+      gameSites: info.gameSites,
+      game: info.gameSites[0].game
     }
   },
 
+  created () {
+    console.log(this.gameSites)
+  },
+
   methods: {
+    getSitesfromGame: function (game) {
+      return this.gameSites.filter(item => item.game === game)[0].sites || []
+    },
+
     click: function (e) {
       let ele = e.target
       if (ele.tagName !== 'A') return false
 
       //  点击游戏种类触发
-      if (ele.hasAttribute('name')) {
-        this.index = ele.getAttribute('index')
-        this.refreshName(ele.getAttribute('name'))
+      if (ele.hasAttribute('game')) {
+        this.game = ele.getAttribute('game')
+        this.refreshGameRank(ele.getAttribute('game'))
+        this.refreshSite(this.game, ele.getAttribute('site'))
       } else if (ele.hasAttribute('site')) {  //  点击网址触发
-        let name = this.categories[this.index].name
-        this.refreshSite(name, ele.getAttribute('site'))
+        let game = this.categories[this.index].game
+        this.refreshSite(game, ele.getAttribute('site'))
       }
     },
 
-    refreshName: function (name) {
+    refreshGameRank: function (game) {
       //  触发获取当前游戏全网直播排行事件
-      event.emit(`update-${name}-rank`)
+      update.emit(`${game}-rank`)
     },
-    refreshSite: function (name, site) {
+    refreshSite: function (game, site) {
       // 触发获得当前游戏下具体网站的直播信息事件
-      event.emit(`update-${name}-${site}`)
+      update.emit(`${game}-${site}`)
     }
   }
 }
