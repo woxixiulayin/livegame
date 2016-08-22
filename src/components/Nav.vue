@@ -77,7 +77,7 @@ $nav-fontsize-base: 1.3rem;
 
 $sub-size-fix: 0.8;
 
-$color-bg-main: #111;
+$color-bg-main: #000;
 $color-bg-sub: #333;
 $color-br: #888;
 $color-font-base: #fff;

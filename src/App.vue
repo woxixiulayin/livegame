@@ -3,6 +3,7 @@
     <app-nav></app-nav>
   </header>
   <!-- main view -->
+  <videorank></videorank>
   <router-view
     transition
     transition-mode="out-in">
@@ -12,11 +13,13 @@
 
 <script>
 import appNav from './components/Nav.vue'
+import videorank from './components/Video-rank'
 import appFooter from './components/Footer.vue'
 
 export default {
   components: {
     appNav,
+    videorank,
     appFooter
   }
 }
