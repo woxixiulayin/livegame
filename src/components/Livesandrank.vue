@@ -10,7 +10,7 @@
 
 <script>
 import rankcontent from './Rankcontent'
-import lives from './Lives'
+import lives from './Livelist'
 
 export default {
   components: {

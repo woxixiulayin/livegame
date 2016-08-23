@@ -1,14 +1,19 @@
 <template>
   <div class="container lives-wrap">
     <ul class='lives-list'>
-      <li class='lives-item'>1</li>
-      <li>2</li>
-      <li>3</li>
+      <li :is='live'></li>
     </ul>
   </div>
 </template>
 
 <script>
+import live from './Live'
+
+export default {
+  components: {
+    live
+  }
+}
 </script>
 
 <style lang='scss' scoped>
