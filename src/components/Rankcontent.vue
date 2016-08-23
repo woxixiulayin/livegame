@@ -28,7 +28,7 @@
   }
 
   @media (min-width: $screen-sm-min) {
-    width: 40%;
+    width: 35%;
   }
 
 }

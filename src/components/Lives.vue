@@ -28,7 +28,7 @@
     width: 100%;
   }
   @media (min-width: $screen-sm-min) {
-    width: 60%;
+    width: 65%;
   }
 }
 .lives-list {
