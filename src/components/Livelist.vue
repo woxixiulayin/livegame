@@ -1,7 +1,7 @@
 <template>
   <div class="container lives-wrap">
     <ul class='lives-list'>
-      <li :is='live'></li>
+      <li is='live'></li>
     </ul>
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
 
 .lives-wrap {
   float: left;
+  border-right: 1px solid #ccc;
   /*display: inline;*/
   /*margin-right: $rankwidth;*/
   /*min-width: $livewrap-minwith;*/
@@ -37,6 +38,6 @@ export default {
   }
 }
 .lives-list {
-  border: 1px solid red;
+
 }
 </style>

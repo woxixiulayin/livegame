@@ -8,7 +8,7 @@
   &:before,
   &:after {
     content: '';
-    display: block;
+    display: table;
   }
 
   &:after {
